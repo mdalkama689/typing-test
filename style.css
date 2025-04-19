@@ -21,40 +21,91 @@ body {
   font-weight: 800;
   margin-top: 10px;
 }
-.time-stamp {
-  height: 100px;
-  width: 100px;
-  border: 2px solid white;
-  border-radius: 100%;
+.time-stamp-container{
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-}
-.time-stamp p:first-of-type {
+} 
+.time-stamp-container p:first-of-type {
   color: whitesmoke;
   font-size: 40px;
   font-weight: 400;
 }
 
-.time-stamp p:last-of-type {
+.time-stamp-container p:last-of-type {
   color: whitesmoke;
 }
 
+.accuracy-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+  
+.accuracy-container  p:first-of-type {
+    color: whitesmoke;
+    font-size: 40px;
+    font-weight: 400;
+  }
+
+  .accuracy-container p:last-of-type {
+    color: whitesmoke;
+  }
+
+  .wpm-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+  
+.wpm-container p:first-of-type {
+    color: whitesmoke;
+    font-size: 40px;
+    font-weight: 400;
+  }
+
+  .wpm-container p:last-of-type {
+    color: whitesmoke;
+  }
+
+  
+  .cpm-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+  
+.cpm-container p:first-of-type {
+    color: whitesmoke;
+    font-size: 40px;
+    font-weight: 400;
+  }
+
+  .cpm-container p:last-of-type {
+    color: whitesmoke;
+  }
 /* input  */
 
 .typing-box {
   border: 2px solid #333;
   padding: 20px;
   border-radius: 8px;
-  width: 80%;
-  max-width: 800px;
+  width: fit-content;
   font-size: 20px;
   line-height: 1.6;
   cursor: text;
   position: relative;
   white-space: pre-wrap;
   min-height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+margin: auto;
+margin-top: 30px;
 }
 
 .char {
@@ -88,4 +139,13 @@ input#hidden-input {
   position: absolute;
   opacity: 0;
   pointer-events: none;
+}
+
+
+.feature-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    margin: 10px 0 ;
 }

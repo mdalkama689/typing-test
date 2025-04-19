@@ -1,39 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <div class="main-container">
-      <div class="feature-container">
-        <p class="main-heading">Test your typing skills</p>
 
-        <div class="feature-container"></div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
 
-        <div class="time-stamp">
-          <p class="time-in-second">20</p>
-          <p>seconds</p>
-        </div>
-        <p class="accuracy" style="color: whitesmoke">
-          Accuracy: <span id="accuracy">0</span>%
-        </p>
-        <p class="wpm" style="color: whitesmoke">
-          WPM: <span id="wpm">0</span>
-        </p>
-        <p id="cpm">CPM: 0</p>
-      </div>
+<div class="main-container">
 
-      <div class="typing-box" id="typing-box">
-        <input type="text" id="hidden-input" autocomplete="off" autofocus />
-        <div id="text-display"></div>
-      </div>
+  <p class="main-heading">Test your typing skills</p>
 
-      <button class="restart-btn">Restart</button>
+  <div class="feature-container">
+
+    <div class="time-stamp-container">
+      <p class="time-in-second">20</p>
+      <p>seconds</p>
+    </div>
+    <div class="accuracy-container">
+      <p id="accuracy">0</p>
+      <p>%Accuracy</p>
     </div>
 
-    <script src="script.js"></script>
-  </body>
+    <div class="wpm-container">
+      <p id="wpm">0</p>
+      <p>WPM</p>
+    </div>
+
+    <div class="cpm-container">
+      <p id="cpm">0</p>
+      <p>CPM</p>
+    </div>
+
+  </div>
+
+
+
+  <div class="typing-box" id="typing-box">
+    <input type="text" id="hidden-input" autocomplete="off" autofocus />
+    <div id="text-display"></div>
+  </div>
+
+  <button class="restart-btn">Restart</button>
+</div>
+</div>
+
+
+<script src="script.js"></script>
+</body>
+
 </html>
