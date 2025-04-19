@@ -12,6 +12,7 @@ body {
 
 .main-container {
   width: 80%;
+  position: relative;
 }
 
 .main-heading {
@@ -275,4 +276,78 @@ select:hover {
 select:focus {
   border-color: #00ffcc;
   box-shadow: 0 0 8px #00ffcc;
+}
+
+
+
+
+.result-container {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  /* max-width: 400px;
+  width: 90%; */
+  width: fit-content;
+  display: flex;
+  /* flex-direction: column; */
+  align-items: center;
+  text-align: center;
+  position: relative;
+  gap: 30px;
+}
+
+.result-container img {
+  /* width: 100px; */
+  max-width: 22rem;
+  margin-bottom: 20px;
+}
+
+.result-container p {
+  font-weight: 400;
+  font-size: 1rem;
+  color: #1b1b20;
+  line-height: 1.5;
+}
+
+.result-container p:first-child {
+  font-size: 1.9602rem;
+  font-weight: bold;
+}
+
+.result-container span {
+  color: #ff9900;
+  font-weight: bold;
+}
+
+/* .result-container button {
+  margin-top: 15px;
+  padding: 10px 20px;
+  background-color: #f1f1f1;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.result-container button:hover {
+  background-color: #ddd;
+} */
+
+
+.try-again {
+  padding: 8px 16px;
+  background-color: #f1f1f1;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+
+}
+
+.try-again:hover {
+  background-color: black;
+  color: whitesmoke;
 }

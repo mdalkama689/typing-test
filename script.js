@@ -5,10 +5,10 @@ const textDisplay = document.getElementById("text-display");
 const restartBtn = document.querySelector(".restart-btn");
 const accuracySpan = document.getElementById("accuracy");
 const wpmSpan = document.getElementById("wpm");
-const cpmSpan = document.getElementById("cpm");  
-const timeDurationOption = document.querySelector("#select-time-duration")
+const cpmSpan = document.getElementById("cpm");
+const timeDurationOption = document.querySelector("#select-time-duration");
 
-let timer = timerDisplay.textContent;
+let timer = parseInt(timerDisplay.textContent);
 let timeInterval;
 let timerStarted = false;
 let startTime = null;
@@ -22,11 +22,9 @@ const wordPool = [
 
 let currentText = "";
 let userInput = "";
-let currentIndex = 0;
 
-// Function to generate a random sentence
 function generateRandomSentence() {
-  const sentenceLength = Math.floor(Math.random() * (10 - 5 + 1)) + 5; // Random sentence length between 5 and 10 words
+  const sentenceLength = Math.floor(Math.random() * (10 - 5 + 1)) + 5;
   let randomSentence = [];
   
   for (let i = 0; i < sentenceLength; i++) {
@@ -34,27 +32,24 @@ function generateRandomSentence() {
     randomSentence.push(randomWord);
   }
 
-  return randomSentence.join(" ") + "."; // Return a random sentence
+  return randomSentence.join(" ") + ".";
 }
 
-// Function to generate multiple random sentences (3 lines)
 function generateRandomText() {
   let randomText = "";
   for (let i = 0; i < 3; i++) {
-    randomText += generateRandomSentence() + "\n"; // Add 3 random sentences with new lines
+    randomText += generateRandomSentence() + "\n";
   }
   return randomText;
 }
 
-// Function to load the new text
 function loadNewText() {
-  currentText = generateRandomText(); // Generate random text with multiple lines
+  currentText = generateRandomText();
   userInput = "";
   input.value = "";
   renderText();
 }
 
-// Function to render the text on the screen
 function renderText() {
   textDisplay.innerHTML = "";
   for (let i = 0; i < currentText.length; i++) {
@@ -79,7 +74,6 @@ function renderText() {
   }
 }
 
-// Timer functions
 function startTimer() {
   if (timerStarted) return;
 
@@ -90,9 +84,11 @@ function startTimer() {
     if (timer > 0) {
       timer--;
       timerDisplay.textContent = timer;
+      timeDurationOption.disabled = true
     } else {
       clearInterval(timeInterval);
       input.disabled = true;
+      timeDurationOption.disabled = false
     }
   }, 1000);
 }
@@ -107,7 +103,7 @@ function calculateAccuracy() {
 
   const totalTyped = userInput.length;
   const accuracy = totalTyped === 0 ? 0 : (correct / totalTyped) * 100;
-return Math.round(accuracy);
+  return Math.round(accuracy);
 }
 
 function calculateWPM() {
@@ -126,7 +122,6 @@ function calculateCPM() {
   return Math.floor(cpm);
 }
 
-// Event listeners
 input.addEventListener("input", (e) => {
   if (!timerStarted) startTimer();
 
@@ -136,11 +131,11 @@ input.addEventListener("input", (e) => {
   if (userInput.endsWith(" ")) {
     const acc = calculateAccuracy();
     const wpm = calculateWPM();
-    const cpm = calculateCPM();  
+    const cpm = calculateCPM();
 
     accuracySpan.textContent = acc;
     wpmSpan.textContent = wpm;
-    cpmSpan.textContent = cpm; 
+    cpmSpan.textContent = cpm;
   }
 
   if (userInput.length === currentText.length) {
@@ -154,17 +149,23 @@ typingBox.addEventListener("click", () => {
   input.focus();
 });
 
+function updateTimer() {
+  timer = parseInt(timeDurationOption.value);
+  timerDisplay.textContent = timer;
+}
+
+timeDurationOption.addEventListener("change", updateTimer);
+
 restartBtn.addEventListener("click", () => {
   clearInterval(timeInterval);
-  timer = timeDurationOption.value;
-  timerDisplay.textContent = timer;
+  updateTimer(); 
   input.disabled = false;
   timerStarted = false;
   startTime = null;
   input.value = "";
-  accuracySpan.textContent = "0";
-  wpmSpan.textContent = "0";
-  cpmSpan.textContent = "0";  
+  accuracySpan.textContent = 0;
+  wpmSpan.textContent = 0;
+  cpmSpan.textContent = 0;
   loadNewText();
 });
 
@@ -188,8 +189,10 @@ toggle.addEventListener('change', () => {
 });
 
 
+const result = document.querySelector(".result-container")
+const resultBtn = document.querySelector(".show-btn")
 
-
-timeDurationOption.addEventListener("change", () => {
-    timerDisplay.textContent = timeDurationOption.value
+resultBtn.addEventListener('click', () => {
+    alert(' sjow')
+    result.style.display = "block"
 })
