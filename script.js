@@ -6,6 +6,7 @@ const restartBtn = document.querySelector(".restart-btn");
 const accuracySpan = document.getElementById("accuracy");
 const wpmSpan = document.getElementById("wpm");
 const cpmSpan = document.getElementById("cpm");  
+const timeDurationOption = document.querySelector("#select-time-duration")
 
 let timer = timerDisplay.textContent;
 let timeInterval;
@@ -155,7 +156,7 @@ typingBox.addEventListener("click", () => {
 
 restartBtn.addEventListener("click", () => {
   clearInterval(timeInterval);
-  timer = 20;
+  timer = timeDurationOption.value;
   timerDisplay.textContent = timer;
   input.disabled = false;
   timerStarted = false;
@@ -163,8 +164,32 @@ restartBtn.addEventListener("click", () => {
   input.value = "";
   accuracySpan.textContent = "0";
   wpmSpan.textContent = "0";
-  cpmSpan.textContent = "CPM: 0";  // Reset CPM
+  cpmSpan.textContent = "0";  
   loadNewText();
 });
 
 loadNewText();
+
+
+const bgMusic = document.querySelector("#bgMusic")
+
+
+
+const toggle = document.getElementById('toggleBtn');
+const statusText = document.getElementById('status');
+
+toggle.addEventListener('change', () => {
+  statusText.textContent = toggle.checked ? 'Music ON' : 'Music OFF';
+  if(toggle.checked){
+    bgMusic.play()
+  }else{
+    bgMusic.pause()
+  }
+});
+
+
+
+
+timeDurationOption.addEventListener("change", () => {
+    timerDisplay.textContent = timeDurationOption.value
+})

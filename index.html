@@ -32,7 +32,34 @@
       <p id="cpm">0</p>
       <p>CPM</p>
     </div>
+  </div> 
 
+  <div class="second-main-container">
+    <div class="music-container">
+      <audio controls autoplay loop id="bgMusic">
+        <source src="music.mp3" >
+      </audio>
+      <div class="toggle-container">
+   
+        <label class="switch">
+          <input type="checkbox" id="toggleBtn">
+          <span class="slider"></span>
+        </label>
+        <span id="status" style="color: white;">Music OFF </span>
+      </div>
+          </div>
+
+          <div>
+            <button class="restart-btn">Restart</button>
+          </div>
+
+          <div>
+            <select name="select-time-duration" id="select-time-duration">
+              <option value="30">30s</option>
+              <option value="60">60s</option>
+              <option value="90">90s</option>
+            </select>
+          </div>
   </div>
 
 
@@ -42,9 +69,18 @@
     <div id="text-display"></div>
   </div>
 
-  <button class="restart-btn">Restart</button>
+
 </div>
-</div>
+
+<!--  -->
+<!-- <div class="toggle-container">
+  <label class="switch">
+    <input type="checkbox" id="toggleBtn">
+    <span class="slider"></span>
+  </label>
+  <span id="status">OFF</span>
+</div> -->
+<!-- </div> -->
 
 
 <script src="script.js"></script>
