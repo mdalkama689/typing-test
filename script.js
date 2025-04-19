@@ -7,7 +7,7 @@ const accuracySpan = document.getElementById("accuracy");
 
 const wpmSpan = document.getElementById("wpm");
 
-let timer = 20;
+let timer = timerDisplay.textContent;
 let timeInterval;
 let timerStarted = false;
 let startTime = null;
