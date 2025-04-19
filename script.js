@@ -7,17 +7,67 @@ const accuracySpan = document.getElementById("accuracy");
 const wpmSpan = document.getElementById("wpm");
 const cpmSpan = document.getElementById("cpm");
 const timeDurationOption = document.querySelector("#select-time-duration");
+const result = document.querySelector(".result-container");
+const resultTag = document.querySelector(".result-tag");
+const resultWpm = document.querySelector(".result-wpm");
+const resultCpm = document.querySelector(".result-cpm");
+const resultAccuracy = document.querySelector(".result-accuracy");
+const resultImg = document.querySelector(".result-img")
+
+const turtleImg = "https://res.cloudinary.com/dn1j6dpd7/image/upload/v1600425019/typing-speed-test/avatars/turtle.svg"
+const cheetaImg = "https://res.cloudinary.com/dn1j6dpd7/image/upload/v1600425019/typing-speed-test/avatars/turtle.svg"
+const rabbitImg = "https://res.cloudinary.com/dn1j6dpd7/image/upload/v1600425019/typing-speed-test/avatars/dino.svg"
+const flashImg = "https://res.cloudinary.com/dn1j6dpd7/image/upload/v1600425019/typing-speed-test/avatars/dino.svg"
+
 
 let timer = parseInt(timerDisplay.textContent);
 let timeInterval;
 let timerStarted = false;
 let startTime = null;
 
+function getResultTag(wpm) {
+  if (wpm < 20) return "Turtle";
+  if (wpm < 40) return "Rabbit";
+  if (wpm < 60) return "Cheetah";
+  return "Flash";
+}
+function getResultImg(wpm) {
+  if (wpm < 20) return turtleImg;
+  if (wpm < 40) return rabbitImg;
+  if (wpm < 60) return cheetaImg;
+  return flashImg;
+}
+
+
 const wordPool = [
-  "apple", "banana", "grape", "orange", "kiwi", "pineapple", "mango", 
-  "peach", "plum", "pear", "watermelon", "melon", "cherry", "blueberry", 
-  "strawberry", "lemon", "apricot", "kiwi", "fruit", "delicious", 
-  "sweet", "tasty", "healthy", "smoothie", "juice", "tart", "sour", "fresh"
+  "apple",
+  "banana",
+  "grape",
+  "orange",
+  "kiwi",
+  "pineapple",
+  "mango",
+  "peach",
+  "plum",
+  "pear",
+  "watermelon",
+  "melon",
+  "cherry",
+  "blueberry",
+  "strawberry",
+  "lemon",
+  "apricot",
+  "kiwi",
+  "fruit",
+  "delicious",
+  "sweet",
+  "tasty",
+  "healthy",
+  "smoothie",
+  "juice",
+  "tart",
+  "sour",
+  "fresh",
 ];
 
 let currentText = "";
@@ -26,7 +76,7 @@ let userInput = "";
 function generateRandomSentence() {
   const sentenceLength = Math.floor(Math.random() * (10 - 5 + 1)) + 5;
   let randomSentence = [];
-  
+
   for (let i = 0; i < sentenceLength; i++) {
     const randomWord = wordPool[Math.floor(Math.random() * wordPool.length)];
     randomSentence.push(randomWord);
@@ -84,11 +134,27 @@ function startTimer() {
     if (timer > 0) {
       timer--;
       timerDisplay.textContent = timer;
-      timeDurationOption.disabled = true
+      timeDurationOption.disabled = true;
     } else {
       clearInterval(timeInterval);
+      userInput = input.value;
+      renderText();
+
       input.disabled = true;
-      timeDurationOption.disabled = false
+      timeDurationOption.disabled = false;
+      const acc = calculateAccuracy();
+      const wpm = calculateWPM();
+      const cpm = calculateCPM();
+      const tag = getResultTag(wpm);
+      const img = getResultImg(wpm)
+      resultImg.src = img
+
+      resultTag.textContent = tag;
+      resultWpm.textContent = `${wpm} WPM`;
+      resultCpm.textContent = `(${cpm} CPM)`;
+      resultAccuracy.textContent = `${acc}%`;
+
+      result.style.display = "flex";
     }
   }, 1000);
 }
@@ -158,7 +224,7 @@ timeDurationOption.addEventListener("change", updateTimer);
 
 restartBtn.addEventListener("click", () => {
   clearInterval(timeInterval);
-  updateTimer(); 
+  updateTimer();
   input.disabled = false;
   timerStarted = false;
   startTime = null;
@@ -171,28 +237,24 @@ restartBtn.addEventListener("click", () => {
 
 loadNewText();
 
+const bgMusic = document.querySelector("#bgMusic");
 
-const bgMusic = document.querySelector("#bgMusic")
+const toggle = document.getElementById("toggleBtn");
+const statusText = document.getElementById("status");
 
-
-
-const toggle = document.getElementById('toggleBtn');
-const statusText = document.getElementById('status');
-
-toggle.addEventListener('change', () => {
-  statusText.textContent = toggle.checked ? 'Music ON' : 'Music OFF';
-  if(toggle.checked){
-    bgMusic.play()
-  }else{
-    bgMusic.pause()
+toggle.addEventListener("change", () => {
+  statusText.textContent = toggle.checked ? "Music ON" : "Music OFF";
+  if (toggle.checked) {
+    bgMusic.play();
+  } else {
+    bgMusic.pause();
   }
 });
 
+const closeBtn = document.querySelector(".fa-xmark");
 
-const result = document.querySelector(".result-container")
-const resultBtn = document.querySelector(".show-btn")
+closeBtn.addEventListener("click", () => {
+  result.style.display = "none";
+});
 
-resultBtn.addEventListener('click', () => {
-    alert(' sjow')
-    result.style.display = "block"
-})
+

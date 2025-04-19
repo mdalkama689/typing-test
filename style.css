@@ -297,7 +297,7 @@ select:focus {
   gap: 30px;
 }
 
-.result-container img {
+.result-img {
   /* width: 100px; */
   max-width: 22rem;
   margin-bottom: 20px;
@@ -335,7 +335,7 @@ select:focus {
   background-color: #ddd;
 } */
 
-
+/* 
 .try-again {
   padding: 8px 16px;
   background-color: #f1f1f1;
@@ -350,4 +350,18 @@ select:focus {
 .try-again:hover {
   background-color: black;
   color: whitesmoke;
+} */
+.fa-xmark{
+  position: absolute;
+  top: 5px;
+  right:5px; 
+  cursor: pointer;
+}
+
+.result-container{
+  position: absolute;
+  display: none;
+  left: 50%;
+  top: 100px;
+  transform: translateX(-50%);
 }
