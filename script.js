@@ -1,28 +1,17 @@
 const timerDisplay = document.querySelector(".time-in-second");
-
-//
 const input = document.getElementById("hidden-input");
 const typingBox = document.getElementById("typing-box");
 const textDisplay = document.getElementById("text-display");
 const restartBtn = document.querySelector(".restart-btn");
+const accuracySpan = document.getElementById("accuracy");
 
-const startTimer = () => {
-  let timer = timerDisplay.textContent;
+const wpmSpan = document.getElementById("wpm");
 
-  const timeInterval = setInterval(() => {
-    if (timer > 0) {
-      timer--;
-      timerDisplay.textContent = timer;
-    } else {
-      clearInterval(timeInterval);
-      input.disabled = true;
-    }
-  }, 1000);
-};
+let timer = 20;
+let timeInterval;
+let timerStarted = false;
+let startTime = null;
 
-input.addEventListener("keydown", () => {
-  startTimer();
-});
 const texts = [
   "Typing is a superpower. Practice makes perfect.",
   "The quick brown fox jumps over the lazy dog.",
@@ -70,9 +59,56 @@ function renderText() {
   }
 }
 
+function startTimer() {
+  if (timerStarted) return;
+
+  timerStarted = true;
+  startTime = new Date();
+
+  timeInterval = setInterval(() => {
+    if (timer > 0) {
+      timer--;
+      timerDisplay.textContent = timer;
+    } else {
+      clearInterval(timeInterval);
+      input.disabled = true;
+    }
+  }, 1000);
+}
+
+function calculateAccuracy() {
+  let correct = 0;
+  for (let i = 0; i < userInput.length; i++) {
+    if (userInput[i] === currentText[i]) {
+      correct++;
+    }
+  }
+
+  const totalTyped = userInput.length;
+  const accuracy = totalTyped === 0 ? 0 : (correct / totalTyped) * 100;
+  return accuracy.toFixed(2);
+}
+
+function calculateWPM() {
+  const now = new Date();
+  const seconds = (now - startTime) / 1000;
+  const wordCount = userInput.trim().split(/\s+/).length;
+  const wpm = seconds === 0 ? 0 : (wordCount / seconds) * 60;
+  return Math.floor(wpm);
+}
+
 input.addEventListener("input", (e) => {
+  if (!timerStarted) startTimer();
+
   userInput = e.target.value;
   renderText();
+
+  if (userInput.endsWith(" ")) {
+    const acc = calculateAccuracy();
+    const wpm = calculateWPM();
+    accuracySpan.textContent = acc;
+    wpmSpan.textContent = wpm;
+  }
 
   if (userInput.length === currentText.length) {
     setTimeout(() => {
@@ -85,44 +121,17 @@ typingBox.addEventListener("click", () => {
   input.focus();
 });
 
+restartBtn.addEventListener("click", () => {
+  clearInterval(timeInterval);
+  timer = 20;
+  timerDisplay.textContent = timer;
+  input.disabled = false;
+  timerStarted = false;
+  startTime = null;
+  input.value = "";
+  accuracySpan.textContent = "0";
+  wpmSpan.textContent = "0";
+  loadNewText();
+});
+
 loadNewText();
-
-
-// calculate accuracy 
-
-function calculateAccuracy() {
-    let correct = 0;
-    for (let i = 0; i < userInput.length; i++) {
-      if (userInput[i] === currentText[i]) {
-        correct++;
-      }
-    }
-  
-    const totalTyped = userInput.length;
-    const accuracy = totalTyped === 0 ? 0 : (correct / totalTyped) * 100;
-    return accuracy.toFixed(2);
-  }
-
-  
-  input.addEventListener("input", (e) => {
-    userInput = e.target.value;
-    renderText();
-  
-    // ✅ Check if Spacebar was typed
-    if (userInput.endsWith(" ")) {
-      const acc = calculateAccuracy();
-      console.log("Current Accuracy:", acc + "%");
-  
-      // Optional: show it in DOM
-      document.getElementById("accuracy").textContent = acc;
-    }
-  
-    // ✅ If whole text is typed
-    if (userInput.length === currentText.length) {
-      setTimeout(() => {
-        loadNewText();
-      }, 200);
-    }
-  });
-
-  
