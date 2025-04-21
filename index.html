@@ -7,330 +7,9 @@
   <title>Typing Speed Test</title>
   <script defer data-domain="typing-test-omega-gold.vercel.app" src="https://plausible.io/js/script.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="style.css">
 </head>
 
-<style>
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    /* Add box-sizing for easier layout management */
-  }
-
-  body {
-    background-color: #181818;
-    /* Dark background */
-    font-family: sans-serif;
-    /* A clean, readable font */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    /* Ensure the body takes up the full viewport height */
-  }
-
-  .main-container {
-    background-color: #282828;
-    /* Slightly lighter dark background for the container */
-    color: #f0f0f0;
-    /* Light text color */
-    border-radius: 12px;
-    padding: 30px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-    width: 90%;
-    max-width: 800px;
-    /* Limit the maximum width of the container */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .main-heading {
-    color: #f0f0f0;
-    text-align: center;
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 20px;
-  }
-
-  .feature-container {
-    display: flex;
-    justify-content: space-around;
-    /* Distribute space evenly */
-    align-items: center;
-    gap: 20px;
-    width: 100%;
-    margin-bottom: 25px;
-  }
-
-  .time-stamp-container,
-  .accuracy-container,
-  .wpm-container,
-  .cpm-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .time-stamp-container p:first-of-type,
-  .accuracy-container p:first-of-type,
-  .wpm-container p:first-of-type,
-  .cpm-container p:first-of-type {
-    color: #00ffcc;
-    /* Highlight color for numbers */
-    font-size: 2.5rem;
-    font-weight: 600;
-    margin-bottom: 5px;
-  }
-
-  .time-stamp-container p:last-of-type,
-  .accuracy-container p:last-of-type,
-  .wpm-container p:last-of-type,
-  .cpm-container p:last-of-type {
-    color: #e0e0e0;
-    font-size: 0.9rem;
-    text-transform: uppercase;
-  }
-
-  .typing-box {
-    background-color: #333;
-    border: 1px solid #555;
-    padding: 20px;
-    border-radius: 8px;
-    width: 100%;
-    /* Make the typing box take full width */
-    font-size: 1.1rem;
-    line-height: 1.6;
-    cursor: text;
-    position: relative;
-    white-space: pre-wrap;
-    min-height: 120px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 20px;
-  }
-
-  #text-display {
-    width: 100%;
-    white-space: pre-wrap;
-  }
-
-  .char {
-    color: #aaa;
-  }
-
-  .correct {
-    color: #fff;
-  }
-
-  .incorrect {
-    color: #f87171;
-  }
-
-  .current {
-    color: #00ffcc;
-    /* Highlight the current character */
-    text-decoration: underline;
-    animation: blink 1s infinite;
-  }
-
-  @keyframes blink {
-
-    0%,
-    100% {
-      opacity: 1;
-    }
-
-    50% {
-      opacity: 0;
-    }
-  }
-
-  input#hidden-input {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    caret-color: transparent;
-    /* Hide the default text input caret */
-  }
-
-  .second-main-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    width: 100%;
-    margin-bottom: 20px;
-  }
-
-  .music-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  #bgMusic {
-    display: none;
-    /* Keep it hidden */
-  }
-
-  .toggle-container {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-weight: bold;
-  }
-
-  .switch {
-    position: relative;
-    display: inline-block;
-    width: 40px;
-    height: 22px;
-  }
-
-  .switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-  }
-
-  .slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ccc;
-    transition: 0.4s;
-    border-radius: 34px;
-  }
-
-  .slider:before {
-    position: absolute;
-    content: "";
-    height: 16px;
-    width: 16px;
-    left: 4px;
-    bottom: 3px;
-    background-color: white;
-    transition: 0.4s;
-    border-radius: 50%;
-  }
-
-  input:checked+.slider {
-    background-color: #00ffcc;
-  }
-
-  input:checked+.slider:before {
-    transform: translateX(18px);
-  }
-
-  .restart-btn {
-    background-color: #eee;
-    color: #333;
-    padding: 10px 20px;
-    font-size: 1rem;
-    font-weight: 600;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-
-  .restart-btn:hover {
-    background-color: #ddd;
-  }
-
-  select {
-    background-color: #333;
-    color: #00ffcc;
-    padding: 10px 16px;
-    font-size: 1rem;
-    font-weight: bold;
-    border: 1px solid #00ffcc;
-    border-radius: 6px;
-    outline: none;
-    appearance: none;
-    cursor: pointer;
-    transition: border-color 0.3s ease;
-    position: relative;
-  }
-
-  select::after {
-    content: '▼';
-    color: #00ffcc;
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    pointer-events: none;
-  }
-
-  select:hover {
-    border-color: #00cc99;
-  }
-
-  .result-container {
-    background-color: #444;
-    color: #f0f0f0;
-    padding: 25px;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    width: 90%;
-    max-width: 500px;
-    display: none;
-    /* Hidden by default */
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-
-  .result-img {
-    max-width: 150px;
-    margin-bottom: 15px;
-  }
-
-  .result-container p {
-    font-weight: 400;
-    font-size: 1rem;
-    line-height: 1.5;
-    margin-bottom: 10px;
-  }
-
-  .result-container p:first-child {
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin-bottom: 5px;
-  }
-
-  .result-container span {
-    color: #00ffcc;
-    font-weight: bold;
-  }
-
-  .fa-xmark {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    cursor: pointer;
-    font-size: 1.2rem;
-    color: #ccc;
-    transition: color 0.2s ease;
-  }
-
-  .fa-xmark:hover {
-    color: #eee;
-  }
-</style>
 
 <body>
   <div class="main-container">
@@ -390,7 +69,7 @@
     </div>
 
     <!-- result container -->
-    <div class="result-container">
+ <div class="result-container">
       <img class="result-img" src="" alt="">
       <div>
         <p>You're a <span class="result-tag"></span></p>
@@ -402,295 +81,82 @@
     </div>
     <p style="font-size:14px; color:#ccc;">
       Why does real-time WPM/CPM differ from the final result? 
-      <a target="_blank" href="https://www.notion.so/1da07337b4a180b7bb41f8981342f554?pvs=4" style="color:#4dabf7; text-decoration:none;">Find out</a>
-    </p>
+      <button class="open-modal-btn">Find-out </button>
+     
+    </p> 
     
+
+    <!--  final rsult container -->
+    <!-- <button class="open-modal-btn">Show Typing Speed Explanation</button> -->
+
+    <div id="typingModal" class="modal-overlay">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 class="modal-title">Understanding Typing Speed Calculation</h2>
+                <button class="close-button">&times;</button>
+            </div>
+            <div class="modal-content">
+                <p>Great — let’s walk through an example to help you clearly understand why real-time WPM/CPM while typing differs from the final WPM/CPM after the timer ends.</p>
+                <p><b>🧠 First, a Quick Recap:</b></p>
+                <p>📌 <b>What are WPM and CPM?</b></p>
+                <p>WPM (Words Per Minute) = how many words you type in a minute.</p>
+                <p>CPM (Characters Per Minute) = how many characters you type in a minute.</p>
+                <p>🎯 <b>What’s the difference?</b></p>
+                <p>👉 Real-time WPM/CPM is calculated while you're still typing — the timer is running and the time so far is used.</p>
+                <p>👉 Final WPM/CPM is calculated after the full timer ends — the entire duration (like 30 seconds) is used.</p>
+                <p>📦 <b>Example:</b></p>
+                <p>Let’s say you choose a 30-second test.</p>
+                <p>At 15 seconds, you’ve typed:</p>
+                <ul>
+                    <li>150 characters = CPM so far</li>
+                    <li>30 words = WPM so far</li>
+                </ul>
+                <p>🔸 <b>Real-time calculation (at 15 sec):</b></p>
+                <p>seconds = 15</p>
+                <p>CPM = (150 / 15) * 60 = 600</p>
+                <p>WPM = (30 / 15) * 60 = 120</p>
+                <p>So you’ll see:</p>
+                <ul>
+                    <li>🟡 Real-time CPM: 600</li>
+                    <li>🟡 Real-time WPM: 120</li>
+                </ul>
+                <p>⏱ <b>Now you slow down...</b></p>
+                <p>In the next 15 seconds, you only type:</p>
+                <ul>
+                    <li>50 characters (total now = 200)</li>
+                    <li>10 more words (total now = 40)</li>
+                </ul>
+                <p>🔹 <b>Final calculation (at 30 sec):</b></p>
+                <p>seconds = 30</p>
+                <p>CPM = (200 / 30) * 60 = 400</p>
+                <p>WPM = (40 / 30) * 60 = 80</p>
+                <p>So at the end:</p>
+                <ul>
+                    <li>🟢 Final CPM: 400</li>
+                    <li>🟢 Final WPM: 80</li>
+                </ul>
+                <p>⚠️ <b>Why this difference?</b></p>
+                <p>Because real-time stats are based on time-so-far (smaller number) and final stats use full time (bigger number).</p>
+                <p>So:</p>
+                <ul>
+                    <li>If you type fast in the beginning → real-time stats will look high.</li>
+                    <li>If you slow down later → final stats will drop because average speed reduces.</li>
+                </ul>
+                <p>✅ <b>What should be shown?</b></p>
+                <p>Both are fine:</p>
+                <ul>
+                    <li>Real-time helps for motivation and feedback.</li>
+                    <li>Final is more accurate because it’s based on total time.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--  -->
   </div>
 
-  <script>
-    const timerDisplay = document.querySelector(".time-in-second");
-    const input = document.getElementById("hidden-input");
-    const typingBox = document.getElementById("typing-box");
-    const textDisplay = document.getElementById("text-display");
-    const restartBtn = document.querySelector(".restart-btn");
-    const accuracySpan = document.getElementById("accuracy");
-    const wpmSpan = document.getElementById("wpm");
-    const cpmSpan = document.getElementById("cpm");
-    const timeDurationOption = document.querySelector("#select-time-duration");
-    const result = document.querySelector(".result-container");
-    const resultTag = document.querySelector(".result-tag");
-    const resultWpm = document.querySelector(".result-wpm");
-    const resultCpm = document.querySelector(".result-cpm");
-    const resultAccuracy = document.querySelector(".result-accuracy");
-    const resultImg = document.querySelector(".result-img")
+  <script src="script.js"></script>
 
-    const slothImg    = "https://cdn-icons-png.flaticon.com/512/616/616408.png"; // Sloth
-const tortoiseImg = "https://cdn-icons-png.flaticon.com/512/1998/1998592.png"; // Tortoise
-const hedgehogImg = "https://cdn-icons-png.flaticon.com/512/1998/1998642.png"; // Hedgehog
-const rabbitImg   = "https://cdn-icons-png.flaticon.com/512/616/6164087.png"; // Rabbit
-const horseImg    = "https://cdn-icons-png.flaticon.com/512/3535/3535445.png"; // Horse
-const tigerImg    = "https://cdn-icons-png.flaticon.com/512/616/6164089.png"; // Tiger
-const cheetahImg  = "https://cdn-icons-png.flaticon.com/512/7674/7674626.png"; // Cheetah
-const pantherImg  = "https://cdn-icons-png.flaticon.com/512/8022/8022786.png"; // Panther
-const eagleImg    = "https://cdn-icons-png.flaticon.com/512/616/6164307.png"; // Eagle
-const hawkImg     = "https://cdn-icons-png.flaticon.com/512/2924/2924449.png"; // Hawk
-const flashImg    = "https://cdn-icons-png.flaticon.com/512/2107/2107957.png"; // Flash (lightning bolt)
-
-
-    let timer = parseInt(timerDisplay.textContent);
-    let timeInterval;
-    let timerStarted = false;
-    let startTime = null;
-
-    function getResultTag(wpm) {
-      if (wpm < 10) return "Sloth";
-      if (wpm < 20) return "Tortoise";
-      if (wpm < 30) return "Hedgehog";
-      if (wpm < 40) return "Rabbit";
-      if (wpm < 50) return "Horse";
-      if (wpm < 60) return "Tiger";
-      if (wpm < 70) return "Cheetah";
-      if (wpm < 80) return "Panther";
-      if (wpm < 90) return "Eagle";
-      if (wpm < 100) return "Hawk";
-      return "Flash";
-    }
-    function getResultImg(wpm) {
-      if (wpm < 10) return slothImg;
-  if (wpm < 20) return tortoiseImg;
-  if (wpm < 30) return hedgehogImg;
-  if (wpm < 40) return rabbitImg;
-  if (wpm < 50) return horseImg;
-  if (wpm < 60) return tigerImg;
-  if (wpm < 70) return cheetahImg;
-  if (wpm < 80) return pantherImg;
-  if (wpm < 90) return eagleImg;
-  if (wpm < 100) return hawkImg;
-  return flashImg;
-    }
-
-
-    const wordPool = [
-      "apple",
-      "banana",
-      "grape",
-      "orange",
-      "kiwi",
-      "pineapple",
-      "mango",
-      "peach",
-      "plum",
-      "pear",
-      "watermelon",
-      "melon",
-      "cherry",
-      "blueberry",
-      "strawberry",
-      "lemon",
-      "apricot",
-      "kiwi",
-      "fruit",
-      "delicious",
-      "sweet",
-      "tasty",
-      "healthy",
-      "smoothie",
-      "juice",
-      "tart",
-      "sour",
-      "fresh",
-    ];
-
-    let currentText = "";
-    let userInput = "";
-
-    function generateRandomSentence() {
-      const sentenceLength = Math.floor(Math.random() * (10 - 5 + 1)) + 5;
-      let randomSentence = [];
-
-      for (let i = 0; i < sentenceLength; i++) {
-        const randomWord = wordPool[Math.floor(Math.random() * wordPool.length)];
-        randomSentence.push(randomWord);
-      }
-
-      return randomSentence.join(" ");
-    }
-
-    function generateRandomText() {
-      let randomText = "";
-      for (let i = 0; i < 1; i++) {
-        randomText += generateRandomSentence() + "\n";
-      }
-      return randomText;
-    }
-
-    function loadNewText() {
-      currentText = generateRandomText();
-      userInput = "";
-      input.value = "";
-      renderText();
-    }
-
-    function renderText() {
-      textDisplay.innerHTML = "";
-      for (let i = 0; i < currentText.length; i++) {
-        const span = document.createElement("span");
-        span.classList.add("char");
-
-        if (i < userInput.length) {
-          span.textContent = currentText[i];
-          if (userInput[i] === currentText[i]) {
-            span.classList.add("correct");
-          } else {
-            span.classList.add("incorrect");
-          }
-        } else {
-          span.textContent = currentText[i];
-          if (i === userInput.length) {
-            span.classList.add("current");
-          }
-        }
-
-        textDisplay.appendChild(span);
-      }
-    }
-
-    function startTimer() {
-      if (timerStarted) return;
-
-      timerStarted = true;
-      startTime = new Date();
-
-      timeInterval = setInterval(() => {
-        if (timer > 0) {
-          timer--;
-          timerDisplay.textContent = timer;
-          timeDurationOption.disabled = true;
-        } else {
-          clearInterval(timeInterval);
-          userInput = input.value;
-          renderText();
-
-          input.disabled = true;
-          timeDurationOption.disabled = false;
-          const acc = calculateAccuracy();
-          const wpm = calculateWPM();
-          const cpm = calculateCPM();
-          const tag = getResultTag(wpm);
-          const img = getResultImg(wpm)
-          resultImg.src = img
-
-          resultTag.textContent = tag;
-          resultWpm.textContent = `${wpm} WPM`;
-          resultCpm.textContent = `(${cpm} CPM)`;
-          resultAccuracy.textContent = `${acc}%`;
-
-          result.style.display = "flex";
-        }
-      }, 1000);
-    }
-
-    function calculateAccuracy() {
-      let correct = 0;
-      for (let i = 0; i < userInput.length; i++) {
-        if (userInput[i] === currentText[i]) {
-          correct++;
-        }
-      }
-
-      const totalTyped = userInput.length;
-      const accuracy = totalTyped === 0 ? 0 : (correct / totalTyped) * 100;
-      return Math.round(accuracy);
-    }
-
-    function calculateWPM() {
-      const now = new Date();
-      const seconds = (now - startTime) / 1000;
-      const wordCount = userInput.trim().split(/\s+/).length;
-      const wpm = seconds === 0 ? 0 : (wordCount / seconds) * 60;
-      return Math.floor(wpm);
-    }
-
-    function calculateCPM() {
-      const now = new Date();
-      const seconds = (now - startTime) / 1000;
-      const characterCount = userInput.length;
-      const cpm = seconds === 0 ? 0 : (characterCount / seconds) * 60;
-      return Math.floor(cpm);
-    }
-
-    input.addEventListener("input", (e) => {
-      if (!timerStarted) startTimer();
-
-      userInput = e.target.value;
-      renderText();
-
-      if (userInput.endsWith(" ")) {
-        const acc = calculateAccuracy();
-        const wpm = calculateWPM();
-        const cpm = calculateCPM();
-
-        accuracySpan.textContent = acc;
-        wpmSpan.textContent = wpm;
-        cpmSpan.textContent = cpm;
-      }
-
-      if (userInput.length === currentText.length) {
-        setTimeout(() => {
-          loadNewText();
-        }, 200);
-      }
-    });
-
-    typingBox.addEventListener("keydown", () => {
-      input.focus();
-    });
-
-    function updateTimer() {
-      timer = parseInt(timeDurationOption.value);
-      timerDisplay.textContent = timer;
-    }
-
-    timeDurationOption.addEventListener("change", updateTimer);
-
-    restartBtn.addEventListener("click", () => {
-      clearInterval(timeInterval);
-      updateTimer();
-      input.disabled = false;
-      timerStarted = false;
-      startTime = null;
-      input.value = "";
-      accuracySpan.textContent = 0;
-      wpmSpan.textContent = 0;
-      cpmSpan.textContent = 0;
-      loadNewText();
-    });
-
-    loadNewText();
-
-    const bgMusic = document.querySelector("#bgMusic");
-
-    const toggle = document.getElementById("toggleBtn");
-    const statusText = document.getElementById("status");
-
-    toggle.addEventListener("change", () => {
-      statusText.textContent = toggle.checked ? "Music ON" : "Music OFF";
-      if (toggle.checked) {
-        bgMusic.play();
-      } else {
-        bgMusic.pause();
-      }
-    });
-
-    const closeBtn = document.querySelector(".fa-xmark");
-
-    closeBtn.addEventListener("click", () => {
-      result.style.display = "none";
-    });
-
-
-
-  </script>
+    
 </body>
 
 </html>
