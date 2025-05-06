@@ -296,3 +296,35 @@ window.addEventListener('click', (event) => {
         modalOverlay.style.display = 'none';
     }
 });
+
+
+const isMobile = window.innerWidth <= 1024; 
+const shareBox = document.getElementById('shareBox');
+const infoIcon = document.getElementById('infoIcon');
+
+if (isMobile) {
+  let isVisible = false;
+
+  infoIcon.addEventListener('click', (e) => {
+    e.stopPropagation();
+    isVisible = !isVisible;
+    shareBox.classList.toggle('visible', isVisible);
+  });
+
+  shareBox.addEventListener('click', (e) => {
+    e.stopPropagation();
+  });
+
+  document.addEventListener('click', () => {
+    isVisible = false;
+    shareBox.classList.remove('visible');
+  });
+} else {
+  const iconBox = document.getElementById('infoIconBox');
+  iconBox.addEventListener('mouseenter', () => {
+    shareBox.classList.add('visible');
+  });
+  iconBox.addEventListener('mouseleave', () => {
+    shareBox.classList.remove('visible');
+  });
+}
