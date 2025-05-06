@@ -1,181 +1,218 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Typing Speed Test</title>
+    <script
+      defer
+      data-domain="typing-test-omega-gold.vercel.app"
+      src="https://plausible.io/js/script.js"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      rel="stylesheet"
+    />
+    <title>Popup Info</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Typing Speed Test</title>
-  <script defer data-domain="typing-test-omega-gold.vercel.app" src="https://plausible.io/js/script.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<link rel="stylesheet" href="style.css">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
-<title>Popup Info</title>
-</head>
-
-
-<body>
-  <div class="main-container">
-
-  <div class="share-container">
-    <div class="icon-box" id="infoIconBox">
-      <div class="share-box" id="shareBox">
-        <a href="https://wa.me/?text=https%3A%2F%2Ftyping-test-omega-gold.vercel.app%2F" 
-           target="_blank" 
-           class="share-link whatsapp">
-          <i class="fab fa-whatsapp"></i> Share this on WhatsApp
-        </a>
-        <a href="https://www.google.com" target="_blank" class="share-link add-tool">
-          <i class="fas fa-plus-circle"></i> Add this tool to your website
-        </a>
+  <body>
+    <div class="main-container">
+      <div class="share-container">
+        <div class="icon-box" id="infoIconBox">
+          <div class="share-box" id="shareBox">
+            <a
+              href="https://wa.me/?text=https%3A%2F%2Ftyping-test-omega-gold.vercel.app%2F"
+              target="_blank"
+              class="share-link whatsapp"
+            >
+              <i class="fab fa-whatsapp"></i> Share this on WhatsApp
+            </a>
+            <a
+              href="https://www.google.com"
+              target="_blank"
+              class="share-link add-tool"
+            >
+              <i class="fas fa-plus-circle"></i> Add this tool to your website
+            </a>
+          </div>
+          <i class="fas fa-info-circle info-icon" id="infoIcon"></i>
+        </div>
       </div>
-      <i class="fas fa-info-circle info-icon" id="infoIcon"></i>
-    </div>
-  </div>
-    <p class="main-heading">Test your typing skills</p>
+      <p class="main-heading">Test your typing skills</p>
 
-    <div class="feature-container">
-      <div class="time-stamp-container">
-        <p class="time-in-second">30</p>
-        <p>seconds</p>
-      </div>
-      <div class="accuracy-container">
-        <p id="accuracy">0</p>
-        <p>%Accuracy</p>
-      </div>
+      <div class="feature-container">
+        <div class="time-stamp-container">
+          <p class="time-in-second">30</p>
+          <p>seconds</p>
+        </div>
+        <div class="accuracy-container">
+          <p id="accuracy">0</p>
+          <p>%Accuracy</p>
+        </div>
 
-      <div class="wpm-container">
-        <p id="wpm">0</p>
-        <p>WPM</p>
-      </div>
+        <div class="wpm-container">
+          <p id="wpm">0</p>
+          <p>WPM</p>
+        </div>
 
-      <div class="cpm-container">
-        <p id="cpm">0</p>
-        <p>CPM</p>
-      </div>
-    </div>
-
-    <div class="second-main-container">
-      <div class="music-container">
-        <audio controls autoplay loop id="bgMusic">
-          <source src="music.mp3" />
-        </audio>
-        <div class="toggle-container">
-          <label class="switch">
-            <input type="checkbox" id="toggleBtn">
-            <span class="slider"></span>
-          </label>
-          <span id="status" style="color: white;">Music OFF</span>
+        <div class="cpm-container">
+          <p id="cpm">0</p>
+          <p>CPM</p>
         </div>
       </div>
 
-      <div>
-        <button class="restart-btn">Restart</button>
+      <div class="second-main-container">
+        <div class="music-container">
+          <audio controls autoplay loop id="bgMusic">
+            <source src="music.mp3" />
+          </audio>
+          <div class="toggle-container">
+            <label class="switch">
+              <input type="checkbox" id="toggleBtn" />
+              <span class="slider"></span>
+            </label>
+            <span id="status" style="color: white">Music OFF</span>
+          </div>
+        </div>
+
+        <div>
+          <button class="restart-btn">Restart</button>
+        </div>
+
+        <div>
+          <select name="select-time-duration" id="select-time-duration">
+            <option value="30">30s</option>
+            <option value="60">60s</option>
+            <option value="90">90s</option>
+          </select>
+        </div>
       </div>
 
-      <div>
-        <select name="select-time-duration" id="select-time-duration">
-          <option value="30">30s</option>
-          <option value="60">60s</option>
-          <option value="90">90s</option>
-        </select>
+      <div class="typing-box" id="typing-box">
+        <input type="text" id="hidden-input" autocomplete="off" autofocus />
+        <div id="text-display"></div>
       </div>
-    </div>
 
-    <div class="typing-box" id="typing-box">
-      <input type="text" id="hidden-input" autocomplete="off" autofocus />
-      <div id="text-display"></div>
-    </div>
+      <!-- result container -->
+      <div class="result-container">
+        <img class="result-img" src="" alt="" />
+        <div>
+          <p>You're a <span class="result-tag"></span></p>
+          <p>
+            Well... You type with the speed of <br />
+            <span class="result-wpm">28 WPM</span>
+            <span class="result-cpm">(124 CPM)</span>. Your accuracy <br />
+            was <span class="result-accuracy"> 77%</span>. It could be better!
+          </p>
 
-    <!-- result container -->
- <div class="result-container">
-      <img class="result-img" src="" alt="">
-      <div>
-        <p>You're a <span class="result-tag"></span></p>
-        <p>Well... You type with the speed of <br> <span class="result-wpm">28 WPM</span> <span class="result-cpm">(124
-            CPM)</span>. Your accuracy <br> was <span class="result-accuracy"> 77%</span>. It could be better!</p>
-
-        <i class="fa-solid fa-xmark"></i>
+          <i class="fa-solid fa-xmark"></i>
+        </div>
       </div>
-    </div>
-    <p style="font-size:14px; color:#ccc;">
-      Why does real-time WPM/CPM differ from the final result? 
-      <button class="open-modal-btn">Find-out </button>
-     
-    </p> 
-    
+      <p style="font-size: 14px; color: #ccc">
+        Why does real-time WPM/CPM differ from the final result?
+        <button class="open-modal-btn">Find-out</button>
+      </p>
 
-    <!--  final rsult container -->
-    <!-- <button class="open-modal-btn">Show Typing Speed Explanation</button> -->
+      <!--  final rsult container -->
+      <!-- <button class="open-modal-btn">Show Typing Speed Explanation</button> -->
 
-    <div id="typingModal" class="modal-overlay">
+      <div id="typingModal" class="modal-overlay">
         <div class="modal">
-            <div class="modal-header">
-                <h2 class="modal-title">Understanding Typing Speed Calculation</h2>
-                <button class="close-button">&times;</button>
-            </div>
-            <div class="modal-content">
-                <p>Great — let’s walk through an example to help you clearly understand why real-time WPM/CPM while typing differs from the final WPM/CPM after the timer ends.</p>
-                <p><b>🧠 First, a Quick Recap:</b></p>
-                <p>📌 <b>What are WPM and CPM?</b></p>
-                <p>WPM (Words Per Minute) = how many words you type in a minute.</p>
-                <p>CPM (Characters Per Minute) = how many characters you type in a minute.</p>
-                <p>🎯 <b>What’s the difference?</b></p>
-                <p>👉 Real-time WPM/CPM is calculated while you're still typing — the timer is running and the time so far is used.</p>
-                <p>👉 Final WPM/CPM is calculated after the full timer ends — the entire duration (like 30 seconds) is used.</p>
-                <p>📦 <b>Example:</b></p>
-                <p>Let’s say you choose a 30-second test.</p>
-                <p>At 15 seconds, you’ve typed:</p>
-                <ul>
-                    <li>150 characters = CPM so far</li>
-                    <li>30 words = WPM so far</li>
-                </ul>
-                <p>🔸 <b>Real-time calculation (at 15 sec):</b></p>
-                <p>seconds = 15</p>
-                <p>CPM = (150 / 15) * 60 = 600</p>
-                <p>WPM = (30 / 15) * 60 = 120</p>
-                <p>So you’ll see:</p>
-                <ul>
-                    <li>🟡 Real-time CPM: 600</li>
-                    <li>🟡 Real-time WPM: 120</li>
-                </ul>
-                <p>⏱ <b>Now you slow down...</b></p>
-                <p>In the next 15 seconds, you only type:</p>
-                <ul>
-                    <li>50 characters (total now = 200)</li>
-                    <li>10 more words (total now = 40)</li>
-                </ul>
-                <p>🔹 <b>Final calculation (at 30 sec):</b></p>
-                <p>seconds = 30</p>
-                <p>CPM = (200 / 30) * 60 = 400</p>
-                <p>WPM = (40 / 30) * 60 = 80</p>
-                <p>So at the end:</p>
-                <ul>
-                    <li>🟢 Final CPM: 400</li>
-                    <li>🟢 Final WPM: 80</li>
-                </ul>
-                <p>⚠️ <b>Why this difference?</b></p>
-                <p>Because real-time stats are based on time-so-far (smaller number) and final stats use full time (bigger number).</p>
-                <p>So:</p>
-                <ul>
-                    <li>If you type fast in the beginning → real-time stats will look high.</li>
-                    <li>If you slow down later → final stats will drop because average speed reduces.</li>
-                </ul>
-                <p>✅ <b>What should be shown?</b></p>
-                <p>Both are fine:</p>
-                <ul>
-                    <li>Real-time helps for motivation and feedback.</li>
-                    <li>Final is more accurate because it’s based on total time.</li>
-                </ul>
-            </div>
+          <div class="modal-header">
+            <h2 class="modal-title">Understanding Typing Speed Calculation</h2>
+            <button class="close-button">&times;</button>
+          </div>
+          <div class="modal-content">
+            <p>
+              Great — let’s walk through an example to help you clearly
+              understand why real-time WPM/CPM while typing differs from the
+              final WPM/CPM after the timer ends.
+            </p>
+            <p><b>🧠 First, a Quick Recap:</b></p>
+            <p>📌 <b>What are WPM and CPM?</b></p>
+            <p>WPM (Words Per Minute) = how many words you type in a minute.</p>
+            <p>
+              CPM (Characters Per Minute) = how many characters you type in a
+              minute.
+            </p>
+            <p>🎯 <b>What’s the difference?</b></p>
+            <p>
+              👉 Real-time WPM/CPM is calculated while you're still typing — the
+              timer is running and the time so far is used.
+            </p>
+            <p>
+              👉 Final WPM/CPM is calculated after the full timer ends — the
+              entire duration (like 30 seconds) is used.
+            </p>
+            <p>📦 <b>Example:</b></p>
+            <p>Let’s say you choose a 30-second test.</p>
+            <p>At 15 seconds, you’ve typed:</p>
+            <ul>
+              <li>150 characters = CPM so far</li>
+              <li>30 words = WPM so far</li>
+            </ul>
+            <p>🔸 <b>Real-time calculation (at 15 sec):</b></p>
+            <p>seconds = 15</p>
+            <p>CPM = (150 / 15) * 60 = 600</p>
+            <p>WPM = (30 / 15) * 60 = 120</p>
+            <p>So you’ll see:</p>
+            <ul>
+              <li>🟡 Real-time CPM: 600</li>
+              <li>🟡 Real-time WPM: 120</li>
+            </ul>
+            <p>⏱ <b>Now you slow down...</b></p>
+            <p>In the next 15 seconds, you only type:</p>
+            <ul>
+              <li>50 characters (total now = 200)</li>
+              <li>10 more words (total now = 40)</li>
+            </ul>
+            <p>🔹 <b>Final calculation (at 30 sec):</b></p>
+            <p>seconds = 30</p>
+            <p>CPM = (200 / 30) * 60 = 400</p>
+            <p>WPM = (40 / 30) * 60 = 80</p>
+            <p>So at the end:</p>
+            <ul>
+              <li>🟢 Final CPM: 400</li>
+              <li>🟢 Final WPM: 80</li>
+            </ul>
+            <p>⚠️ <b>Why this difference?</b></p>
+            <p>
+              Because real-time stats are based on time-so-far (smaller number)
+              and final stats use full time (bigger number).
+            </p>
+            <p>So:</p>
+            <ul>
+              <li>
+                If you type fast in the beginning → real-time stats will look
+                high.
+              </li>
+              <li>
+                If you slow down later → final stats will drop because average
+                speed reduces.
+              </li>
+            </ul>
+            <p>✅ <b>What should be shown?</b></p>
+            <p>Both are fine:</p>
+            <ul>
+              <li>Real-time helps for motivation and feedback.</li>
+              <li>Final is more accurate because it’s based on total time.</li>
+            </ul>
+          </div>
         </div>
+      </div>
+      <!--  -->
     </div>
-    <!--  -->
-  </div>
 
-  <script src="script.js"></script>
-
-    
-</body>
-
+    <script src="script.js"></script>
+  </body>
 </html>
